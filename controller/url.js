@@ -18,7 +18,16 @@ async function handleGneneratenewShortURL(req,res){
    return res.status(200).json({id:shortId});
     }
 
+    async function handlegetanalytics(req,res){
+        const shortId=req.params.shortId;
+        const result=await URL.findOne({
+            shortId
+        })
+        return res.json({totalCLicks:result.visitHistory.length,analytics:result.visitHistory})
+    }
+
 
     module.exports={
-        handleGneneratenewShortURL
+        handleGneneratenewShortURL,
+        handlegetanalytics,
     }
